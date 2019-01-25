@@ -1,0 +1,13 @@
+[dbProperties]
+username = "postgres"
+password = "123"
+database = "postgres"
+
+[serverRun]
+port = "8080"
+
+[mailProperties]
+from = "christian.t3st@gmail.com"
+password = "t3st3r01"
+hostname = "smtp.gmail.com:587"
+servername = "smtp.gmail.com"
