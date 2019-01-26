@@ -1,2 +1,4 @@
 # GoManagerScript
-ejecución ys eguimiento a scripts desde api-rest con golang
+Ejecución y seguimiento a scripts desde api-rest con golang
+
+BDD postgres

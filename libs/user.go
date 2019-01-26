@@ -6,6 +6,7 @@ package libs
 */
 import (
 	"github.com/GoManagerScript/model"
+	"github.com/GoManagerScript/utils"
 )
 
 /*User ...*/
@@ -36,6 +37,7 @@ type ActionSetUser interface {
 
 /*SetNewUser ...*/
 func (u UserAll) SetNewUser() model.RespSetUser {
+	utils.Info.Printf("Entro a la funcion y la ctm!")
 	var resp model.RespSetUser
 	if u.UserName != "" && u.Password != "" && u.Nombre != "" && u.Apellidos != "" && u.Fono != "" && u.Permiso > 0 {
 		pass := model.GetMD5Hash(u.Password)

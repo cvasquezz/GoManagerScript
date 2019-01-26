@@ -96,12 +96,14 @@ func InserUser(UserName, Password, Nombre, Apellidos, Fono string, Permiso int) 
 		flag = false
 		mess = "Problemas al generar la insercion del nuevo usuario\n"
 		utils.Error.Printf(mess)
+		utils.Error.Printf("%v", err)
 	}
 	_, err = stmt.Exec(UserName, Password, Nombre, Apellidos, Fono, Permiso)
 	if err != nil {
 		flag = false
 		mess = "Problemas al insertar el nuevo usuario\n"
 		utils.Error.Printf(mess)
+		utils.Error.Printf("%v", err)
 	}
 	defer stmt.Close()
 	resp := RespSetUser{

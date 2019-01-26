@@ -1,7 +1,7 @@
 #!/bin/bash
 ################# NO MODIFICAR  #################
 RUTA=`pwd`
-APP="${RUTA}/pullService"
+APP="${RUTA}/GoManagerScript"
 SERVICE=${RUTA}/service.inc
 PKWORK=RUTA
 #################################################
@@ -18,9 +18,9 @@ echo "Instalo las dependencias"
 #${GOPATH}/bin/dep ensure
 go install .
 #GENERO EL ARCHIVO PARA EL SERVICIO
-echo "generando el servicio pullService"
-cat .service.inc | sed "s~$PKWORK~$APP~" > pullService.service
-sudo mv pullService.service /etc/systemd/system/pullService.service  
+echo "generando el servicio GoManagerScript"
+cat .service.inc | sed "s~$PKWORK~$APP~" > GoManagerScript.service
+sudo mv GoManagerScript.service /etc/systemd/system/GoManagerScript.service  
 sudo systemctl daemon-reload                
 #DEPLOYO EL PROYECTO
 echo "deployando el proyecto"

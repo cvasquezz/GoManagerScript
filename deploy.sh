@@ -1,10 +1,10 @@
 #!/bin/bash
 echo "Deteniendo el servicio"
-sudo systemctl stop pullService
+sudo systemctl stop GoManagerScript
 echo "Borrando el binario"
-rm -rf pullService
+rm -rf GoManagerScript
 echo "creando nuevo binario"
 GOOS=linux GOARCH=amd64 go build
-mv pullShell pullService
+mv GoManagerScript GoManagerScript
 echo "iniciando el servicio"
-sudo systemctl start pullService
+sudo systemctl start GoManagerScript
