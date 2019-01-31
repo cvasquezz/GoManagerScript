@@ -47,6 +47,7 @@ func InitPull(mallid, kind string) bool {
 	return true
 }
 
+/*buildScript ...*/
 func buildScript(x ScriptExec, kind, mallid string) ([]byte, error) {
 	utils.Info.Printf("Preparando ejecucion del script")
 	var err error
@@ -54,6 +55,7 @@ func buildScript(x ScriptExec, kind, mallid string) ([]byte, error) {
 	var stdout []byte
 	switch x.LangPro {
 	case "python":
+		/*Para python no esta funcionando aún u.U*/
 		utils.Info.Printf("Script de tipo python")
 		c := exec.Command("/usr/bin/python", "-c", "import sys; sys.path.append('"+x.PathPro+"')", "import "+x.ScripPro, x.FuncPro)
 		cmdReader, _ := c.StdoutPipe()
@@ -71,8 +73,12 @@ func buildScript(x ScriptExec, kind, mallid string) ([]byte, error) {
 	case "sh":
 		utils.Info.Printf("Script de tipo bash")
 		script := x.PathPro + "/" + x.ScripPro
-		c := exec.Command("/bin/sh", script, kind, mallid)
-		cmdReader, _ := c.StdoutPipe()
+		utils.Info.Printf("/bin/sh " + script)
+		c := exec.Command("sh", script, kind, mallid)
+		cmdReader, err := c.StdoutPipe()
+		if err != nil {
+			utils.Error.Printf("%v", err)
+		}
 		scanner := bufio.NewScanner(cmdReader)
 		go func() {
 			for scanner.Scan() {
@@ -81,7 +87,10 @@ func buildScript(x ScriptExec, kind, mallid string) ([]byte, error) {
 			}
 			endProcessExec(kind, mallid)
 		}()
-		c.Start()
+		err = c.Start()
+		if err != nil {
+			utils.Error.Printf("La zorra wn %v", err)
+		}
 		utils.Info.Printf("Iniciando ejecucion")
 		pid = c.Process.Pid
 		//err = c.Wait() // <==  para dejarlo syncro
@@ -154,6 +163,7 @@ func ValidaStatus(mallid, kind string) bool {
 	}
 	defer db.Close()
 	var status string
+	utils.Info.Printf("select job_status from job where job_mallid='" + mallid + "' and job_cod='" + kind + "'")
 	result, err := db.Query("select job_status from job where job_mallid='" + mallid + "' and job_cod='" + kind + "'")
 	if err != nil {
 		utils.Error.Printf("No se pudo realizar la consulta a la BDD  \n")
