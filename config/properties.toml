@@ -7,7 +7,7 @@ database = "postgres"
 port = "8080"
 
 [mailProperties]
-from = "christian.t3st@gmail.com"
-password = "t3st3r01"
+from = "correo@gmail.com"
+password = "121345677"
 hostname = "smtp.gmail.com:587"
 servername = "smtp.gmail.com"
